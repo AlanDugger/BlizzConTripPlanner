@@ -16,9 +16,7 @@ public class Main extends Application
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));			
 			Scene scene = new Scene(root,600,600);
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			root.setId("mainPane");			
-			System.out.println(getClass().getResource("style.css").toExternalForm());
+			primaryStage.initStyle(StageStyle.UNDECORATED);	
 			scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());						
 			primaryStage.setScene(scene);						
 			primaryStage.setResizable(false);
