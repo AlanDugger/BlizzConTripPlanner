@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ public class SaveFile
 	private static String leftNotes = "";
 	private static String rightNotes = "";
 	private static ArrayList<BudgetItem> budgetItems = new ArrayList<BudgetItem>();
+	private static ArrayList<CostItem> costItems = new ArrayList<CostItem>();
 	final static String fileName = "blizzconapp.txt";
 	
 	
@@ -45,10 +48,14 @@ public class SaveFile
 			boolean leftNoteTag = false;
 			boolean rightNoteTag = false;
 			boolean budgetItemTag = false;
+			boolean costItemTag = false;
 			leftNotes = "";
 			rightNotes = "";
 			budgetItems.clear();
+			costItems.clear();
 			int currBudgetPart = 0;
+			int currCostPart = 0;
+			String[] costParts = new String[3];
 			String[] parts = new String[4];
 			while ( (line = reader.readLine()) != null)
 			{
@@ -94,13 +101,23 @@ public class SaveFile
 					budgetItemTag = false;
 					continue;
 				}
-				
+				else if (line.equals("<CostItem>"))
+				{
+					costItemTag = true;
+					continue;
+				}
+				else if (line.equals("</CostItem>"))
+				{
+					costItemTag = false;
+					continue;
+				}
 				
 				if (runDataTag)
 				{
 					String[] runParts = line.split(" ");
 					runCount = Integer.parseInt(runParts[1]);
 				}
+				
 				if (budgetItemTag)
 				{
 					
@@ -126,6 +143,26 @@ public class SaveFile
 						tmpItem = new BudgetItem(name, amount, paid, seeNotes);
 						budgetItems.add(tmpItem);
 						currBudgetPart = 0;
+					}
+				}
+				else if (costItemTag)
+				{
+					
+					if (currCostPart < 3)
+					{
+						costParts[currCostPart] = line;
+						currCostPart++;
+					}
+					
+					if (currCostPart == 3)
+					{
+						LocalDate date = LocalDate.parse(costParts[0], DateTimeFormatter.ofPattern("MM/d/yyyy"));
+						String name = costParts[1];						
+						double amount = Double.parseDouble(costParts[2]);					
+						CostItem tmpItem;				 		
+						tmpItem = new CostItem(date, name, amount);
+						costItems.add(tmpItem);
+						currCostPart = 0;
 					}
 				}
 				else if (leftNoteTag)
@@ -213,6 +250,22 @@ public class SaveFile
 					writer.println("</BudgetItem>");
 				}
 			}
+			
+			if (costItems != null && !costItems.isEmpty())
+			{
+				for (CostItem item : costItems)
+				{
+					writer.println("<CostItem>");
+					writer.println(item.getEntryDate());
+					
+					writer.println(item.getEntryName());
+					
+					writer.println(item.getCostAmountValue());										
+					
+					writer.println("</CostItem>");
+				}
+			}
+			
 			writer.close();
 		}
 		catch (IOException e)
@@ -234,6 +287,22 @@ public class SaveFile
 			return;
 		
 		budgetItems.addAll(items);
+
+	}
+	
+	public static ArrayList<CostItem> getCostItems()
+	{
+		return costItems;
+	}
+	
+	public static void updateCostItems(ObservableList<CostItem> items)
+	{
+		costItems.clear();		
+		
+		if (items == null || items.isEmpty())
+			return;
+		
+		costItems.addAll(items);
 
 	}
 	

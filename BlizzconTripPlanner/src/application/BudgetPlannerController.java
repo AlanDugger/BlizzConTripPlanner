@@ -47,7 +47,7 @@ public class BudgetPlannerController
 	@FXML
 	private TextField textfieldRemaining;
 	@FXML
-	private TextField textfieldPaid;
+	private TextField textfieldPaid;	
 	
 	public void initialize()
 	{
@@ -66,9 +66,7 @@ public class BudgetPlannerController
 		catch (Exception e)
 		{
 			e.printStackTrace();
-		}
-				
-		
+		}						
 	}
 	
 	@FXML
@@ -137,7 +135,7 @@ public class BudgetPlannerController
 		}
 	}
 	
-	public void deleteItem(BudgetItem item) {
+	private void deleteItem(BudgetItem item) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText("Delete item: " + item.getEntryName());
 		alert.setTitle("Delete Budget Item");
