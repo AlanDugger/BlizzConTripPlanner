@@ -1,7 +1,20 @@
 <RunData>
-runCount 78
+runCount 83
 </RunData>
 <LeftNote>
+Test notes (left notes)
 </LeftNote>
 <RightNote>
+Test right notes
 </RightNote>
+<BudgetItem>
+Test Entry
+5
+yes
+no
+</BudgetItem>
+<CostItem>
+10/31/2017
+Food
+15.230000000000000426325641456060111522674560546875
+</CostItem>

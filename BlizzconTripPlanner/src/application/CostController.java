@@ -59,7 +59,7 @@ public class CostController
 		
 		try
 		{
-			BudgetData.getInstance().loadBudgetItems();			
+			CostData.getInstance().loadCostItems();			
 			costTableView.setItems(CostData.getInstance().getCostItems());
 			columnDate.setCellValueFactory(new PropertyValueFactory<CostItem, String>("entryDate"));
 			columnEntry.setCellValueFactory(new PropertyValueFactory<CostItem, String>("entryName"));

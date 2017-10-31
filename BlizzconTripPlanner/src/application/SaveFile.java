@@ -162,7 +162,7 @@ public class SaveFile
 						CostItem tmpItem;				 		
 						tmpItem = new CostItem(date, name, amount);
 						costItems.add(tmpItem);
-						currCostPart = 0;
+						currCostPart = 0;						
 					}
 				}
 				else if (leftNoteTag)
