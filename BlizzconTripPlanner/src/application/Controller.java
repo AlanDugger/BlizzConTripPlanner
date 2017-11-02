@@ -62,10 +62,10 @@ public class Controller
 		try
 		{
 			toggleButton(btnTodoListMenu);
-			Parent root = FXMLLoader.load(getClass().getResource("TodoWindow.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/views/TodoWindow.fxml"));
 			Stage stage = new Stage();
 			Scene scene = new Scene(root, 1000, 560);
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			scene.getStylesheets().addAll(this.getClass().getResource("/views/style.css").toExternalForm());
 			stage.setAlwaysOnTop(true);			
 			stage.centerOnScreen();
 			stage.initStyle(StageStyle.UNDECORATED);													
@@ -105,10 +105,10 @@ public class Controller
 		try
 		{
 			toggleButton(btnBudgetMenu);
-			Parent root = FXMLLoader.load(getClass().getResource("BudgetWindow.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/views/BudgetWindow.fxml"));
 			Stage stage = new Stage();
 			Scene scene = new Scene(root, 1000, 560);
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			scene.getStylesheets().addAll(this.getClass().getResource("/views/style.css").toExternalForm());
 			stage.setAlwaysOnTop(true);			
 			stage.centerOnScreen();
 			stage.initStyle(StageStyle.UNDECORATED);													
@@ -148,10 +148,10 @@ public class Controller
 		try
 		{
 			toggleButton(btnCostMenu);
-			Parent root = FXMLLoader.load(getClass().getResource("CostWindow.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/views/CostWindow.fxml"));
 			Stage stage = new Stage();
 			Scene scene = new Scene(root, 1000, 500);
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			scene.getStylesheets().addAll(this.getClass().getResource("/views/style.css").toExternalForm());
 			stage.setAlwaysOnTop(true);			
 			stage.centerOnScreen();
 			stage.initStyle(StageStyle.UNDECORATED);													
@@ -191,10 +191,10 @@ public class Controller
 		try
 		{				
 			toggleButton(btnNotesMenu);			
-			Parent root = FXMLLoader.load(getClass().getResource("NotesWindow.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/views/NotesWindow.fxml"));
 			Stage stage = new Stage();
 			Scene scene = new Scene(root, 1000, 500);
-			scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+			scene.getStylesheets().addAll(this.getClass().getResource("/views/style.css").toExternalForm());
 			stage.setAlwaysOnTop(true);			
 			stage.centerOnScreen();
 			stage.initStyle(StageStyle.UNDECORATED);													

@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import datamodels.BudgetItem;
+import datamodels.CostItem;
+import datamodels.TodoItem;
 import javafx.collections.ObservableList;
 
 public class SaveFile 
@@ -18,8 +21,10 @@ public class SaveFile
 	private static int runCount = 0;
 	private static String leftNotes = "";
 	private static String rightNotes = "";
+	private static String todoNotes = "";
 	private static ArrayList<BudgetItem> budgetItems = new ArrayList<BudgetItem>();
 	private static ArrayList<CostItem> costItems = new ArrayList<CostItem>();
+	private static ArrayList<TodoItem> todoItems = new ArrayList<TodoItem>();
 	final static String fileName = "blizzconapp.txt";
 	
 	
@@ -40,23 +45,38 @@ public class SaveFile
 	public static void loadData()
 	{
 		try
-		{
+		{	
+			// File reading variables
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader reader = new BufferedReader(fileReader);
-			String line = null;			
+			String line = null;
+			
+			// Tag interpretation variables
 			boolean runDataTag = false;
 			boolean leftNoteTag = false;
 			boolean rightNoteTag = false;
 			boolean budgetItemTag = false;
 			boolean costItemTag = false;
+			boolean todoItemTag = false;
+			
+			// Clear any current data to prepare for loading which can be called 
+			// more than once per execution of application
 			leftNotes = "";
 			rightNotes = "";
+			todoNotes = "";
 			budgetItems.clear();
 			costItems.clear();
+			todoItems.clear();
+			
+			// Variables used for reading components of each entry
 			int currBudgetPart = 0;
 			int currCostPart = 0;
+			int currTodoPart = 0;
 			String[] costParts = new String[3];
 			String[] parts = new String[4];
+			String[] todoParts = new String[3];
+			
+			
 			while ( (line = reader.readLine()) != null)
 			{
 				
@@ -109,6 +129,24 @@ public class SaveFile
 				else if (line.equals("</CostItem>"))
 				{
 					costItemTag = false;
+					continue;
+				}
+				else if (line.equals("<TodoItem>"))
+				{
+					todoItemTag = true;
+					continue;
+				}
+				else if (line.equals("</TodoItem>"))
+				{
+					LocalDate date = LocalDate.parse(todoParts[0], DateTimeFormatter.ofPattern("MM/d/yyyy"));
+					String name = todoParts[1];																				
+					TodoItem tmpItem;				 		
+					tmpItem = new TodoItem(name, todoNotes, date);
+					todoItems.add(tmpItem);
+					
+					currTodoPart = 0;
+					todoNotes = "";					
+					todoItemTag = false;
 					continue;
 				}
 				
@@ -165,6 +203,24 @@ public class SaveFile
 						currCostPart = 0;						
 					}
 				}
+				else if (todoItemTag)
+				{					
+					if (currTodoPart < 2)
+					{
+						todoParts[currTodoPart] = line;
+						currTodoPart++;
+					}
+					else
+					{
+						if (line.equals("~"))
+						{
+							todoNotes += System.getProperty("line.separator");						
+						}
+						else if (todoNotes.equals(""))
+							todoNotes += line;
+					}
+														
+				}
 				else if (leftNoteTag)
 				{					
 					if (line.equals("~"))
@@ -195,14 +251,13 @@ public class SaveFile
 					}									
 				}
 				else
-					continue;
-				
-			}
+					continue;				
+			}	
 			reader.close();
 		}
 		catch(IOException e)
 		{
-			
+			e.printStackTrace();
 		}			
 	}
 	
@@ -266,6 +321,19 @@ public class SaveFile
 				}
 			}
 			
+			if (todoItems != null && !todoItems.isEmpty())
+			{
+				for (TodoItem item : todoItems)
+				{
+					BufferedReader detailsReader = new BufferedReader(new StringReader(item.getDetails()));
+					writer.println("<TodoItem>");
+					writer.println(item.getDeadlineString());
+					writer.println(item.getShortDesc());					
+					detailsReader.lines().forEach(line -> {if (line.length() > 0) writer.println(line); else writer.println("~");});
+					writer.println("</TodoItem>");
+				}
+			}
+			
 			writer.close();
 		}
 		catch (IOException e)
@@ -277,6 +345,20 @@ public class SaveFile
 	public static ArrayList<BudgetItem> getBudgetItems()
 	{
 		return budgetItems;
+	}
+	
+	public static ArrayList<TodoItem> getTodoItems()
+	{
+		return todoItems;
+	}
+	
+	public static void updateTodoItems(ObservableList<TodoItem> items)
+	{
+		todoItems.clear();
+		if (items == null || items.isEmpty())
+			return;
+		
+		todoItems.addAll(items);				
 	}
 	
 	public static void updateBudgetItems(ObservableList<BudgetItem> items)

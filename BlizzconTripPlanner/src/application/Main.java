@@ -14,10 +14,10 @@ public class Main extends Application
 	{					
 		try 
 		{
-			Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));			
+			Parent root = FXMLLoader.load(getClass().getResource("/views/MainWindow.fxml"));			
 			Scene scene = new Scene(root,600,600);
 			primaryStage.initStyle(StageStyle.UNDECORATED);	
-			scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());						
+			scene.getStylesheets().add(getClass().getResource("/views/style.css").toExternalForm());						
 			primaryStage.setScene(scene);						
 			primaryStage.setResizable(false);
 			primaryStage.show();				
