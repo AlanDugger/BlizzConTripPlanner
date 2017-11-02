@@ -1,19 +1,7 @@
 <RunData>
-runCount 119
+runCount 128
 </RunData>
 <LeftNote>
-Test notes (left notes)
 </LeftNote>
 <RightNote>
-Notes test (right notes)
 </RightNote>
-<CostItem>
-11/2/2017
-Gas
-100
-</CostItem>
-<TodoItem>
-11/3/2017
-Test
-This is just a test.
-</TodoItem>
