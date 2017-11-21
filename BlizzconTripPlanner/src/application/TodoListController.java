@@ -207,6 +207,7 @@ public class TodoListController
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.initOwner(btnNewEntry.getScene().getWindow());
 		dialog.setTitle("Add New Todo Item");
+		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/todoItemDialog.fxml"));				
 		
 		try 
@@ -220,7 +221,9 @@ public class TodoListController
 		
 		dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
 		dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);			
-		
+		Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+		stage.setAlwaysOnTop(true);
+		stage.toFront();
 		Optional<ButtonType> result = dialog.showAndWait();
 		
 		if (result.isPresent() && result.get() == ButtonType.OK) 

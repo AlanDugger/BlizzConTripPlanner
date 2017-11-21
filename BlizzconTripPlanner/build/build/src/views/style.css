@@ -1,0 +1,39 @@
+#mainPane {
+	-fx-background-image: url("/res/background_image.jpg");
+    -fx-background-repeat: stretch;
+	-fx-background-size: 100%;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#notesPane {
+	-fx-background-image: url("/res/notes_background_image.bmp");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 100%;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#budgetPane {
+	-fx-background-image: url("/res/budget_background_image.bmp");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 100%;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#costPane {
+	-fx-background-image: url("/res/cost_background_image.bmp");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 100%;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+#todoPane {
+	-fx-background-image: url("/res/todo_background_image.bmp");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 100%;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}

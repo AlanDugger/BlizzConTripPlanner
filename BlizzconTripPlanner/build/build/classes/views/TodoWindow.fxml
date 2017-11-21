@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="todoPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.TodoListController">
+  <children>
+    <ListView fx:id="todoListView" blendMode="SRC_ATOP" opacity="0.5" prefHeight="200.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-weight: bolder;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <effect>
+        <DropShadow>
+          <color>
+            <Color blue="0.200" green="0.968" red="1.000" fx:id="x1" />
+          </color>
+        </DropShadow>
+      </effect>
+    </ListView>
+    <Button fx:id="btnExitTodo" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitTodoMenu" prefWidth="165.0" text="Exit" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <font>
+        <Font name="Arial Black" size="12.0" fx:id="x2" />
+      </font>
+      <GridPane.margin>
+        <Insets bottom="10.0" right="10.0" />
+      </GridPane.margin>
+    </Button>
+    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <children>
+        <Button fx:id="btnNewEntry" font="$x2" maxWidth="-Infinity" mnemonicParsing="false" prefWidth="165.0" text="Add New Entry" onAction="#showNewItemDialog">
+          <VBox.margin>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          </VBox.margin>
+        </Button>
+        <Button font="$x2" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteEntry" prefWidth="165.0" text="Delete Selected">
+          <VBox.margin>
+            <Insets bottom="10.0" left="5.0" right="10.0" fx:id="x3" />
+          </VBox.margin>
+        </Button>
+      </children>
+    </VBox>
+    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <children>
+        <TextArea fx:id="textareaDetails" blendMode="SRC_ATOP" disable="true" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" opacity="0.5" prefHeight="430.0" prefWidth="590.0" style="-fx-text-fill: #000000; -fx-font-weight: bolder;" wrapText="true">
+          <effect>
+            <DropShadow color="$x1" />
+          </effect>
+        </TextArea>
+        <Label fx:id="labelDeadline" alignment="CENTER" blendMode="SRC_ATOP" font="$x2" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.65" prefHeight="20.0" prefWidth="590.0" style="-fx-text-fill: #000000; -fx-font-weight: bolder;" text="" textAlignment="CENTER">
+          <effect>
+            <DropShadow color="$x1" />
+          </effect>
+        </Label>
+      </children>
+    </VBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="590.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="180.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="25.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="450.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="25.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
